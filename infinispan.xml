@@ -49,7 +49,7 @@
 
     <transaction
         transactionManagerLookupClass="org.infinispan.transaction.lookup.GenericTransactionManagerLookup"
-        transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
+        transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
         data to be persisted, not just what doesn't fit into memory. Shared is false because there
@@ -72,7 +72,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.repo.CacheDirPath:target/FedoraRepository/storage}"/>
 
-          <property name="fsyncMode" value="perWrite"/>
+          <property name="fsyncMode" value="default"/>
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
@@ -112,7 +112,7 @@
 
     <transaction
             transactionManagerLookupClass="org.infinispan.transaction.lookup.GenericTransactionManagerLookup"
-            transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
+            transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
         data to be persisted, not just what doesn't fit into memory. Shared is false because there
@@ -135,7 +135,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.CacheDirPath:target/FedoraRepositoryMetaData/storage}"/>
 
-          <property name="fsyncMode" value="perWrite"/>
+          <property name="fsyncMode" value="default"/>
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
@@ -175,7 +175,7 @@
 
     <transaction
             transactionManagerLookupClass="org.infinispan.transaction.lookup.GenericTransactionManagerLookup"
-            transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
+            transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
         data to be persisted, not just what doesn't fit into memory. Shared is false because there
@@ -198,7 +198,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.binary.CacheDirPath:target/FedoraRepositoryBinaryData/storage}"/>
 
-          <property name="fsyncMode" value="perWrite"/>
+          <property name="fsyncMode" value="default"/>
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
