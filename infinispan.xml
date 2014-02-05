@@ -39,7 +39,7 @@
       <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
 
-    <locking isolationLevel="READ_COMMITTED" writeSkewCheck="false" lockAcquisitionTimeout="15000" />
+    <locking isolationLevel="READ_COMMITTED" writeSkewCheck="false" lockAcquisitionTimeout="150000" useLockStriping="true" />
 
     <transaction transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
     <!--
