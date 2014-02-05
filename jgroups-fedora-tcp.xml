@@ -1,0 +1,35 @@
+<config xmlns="urn:org:jgroups"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/JGroups-3.0.xsd">
+    <TCP loopback="true"
+	client_bind_addr="GLOBAL"
+	conn_expire_time="1048576"
+	linger="-1"
+	peer_addr_read_timeout="10000"
+	reaper_interval="120000"
+	recv_buf_size="26214400"
+	send_buf_size="5242880"
+	send_queue_size="64000"
+	sock_conn_timeout="10000"
+	tcp_nodelay="true"
+	use_send_queues="true" />
+    <MPING timeout="10000"
+            num_initial_members="1"/>
+    <MERGE2 max_interval="30000"
+            min_interval="10000"/>
+    <FD_SOCK/>
+    <FD_ALL/>
+    <VERIFY_SUSPECT timeout="5000"  />
+    <BARRIER />
+    <pbcast.NAKACK2 use_mcast_xmit="false"
+                   discard_delivered_msgs="true"/>
+    <UNICAST timeout="600,900,2500"/>
+    <pbcast.STABLE stability_delay="2000" desired_avg_gossip="50000"
+                   max_bytes="4M"/>
+    <pbcast.GMS print_local_addr="true" join_timeout="6000"
+                view_bundling="true"/>
+    <MFC max_credits="2M"
+         min_threshold="0.4"/>
+    <FRAG2 frag_size="60K"  />
+    <pbcast.STATE_TRANSFER />
+</config>

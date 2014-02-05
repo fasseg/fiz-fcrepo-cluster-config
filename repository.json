@@ -10,13 +10,7 @@
         "clusterName" : "modeshape-cluster"
     },
     "query" : {
-        "enabled" : "${fcrepo.modeshape.query.enabled:true}",
-        "indexStorage" : {
-            "type" : "filesystem",
-            "location" : "${fcrepo.modeshape.index.location:target/indexes}",
-            "lockingStrategy" : "native",
-            "fileSystemAccessType" : "auto"
-        },
+        "enabled" : "false",
         "rebuildUponStartup" : "if_missing",
 
         "indexing" : {
