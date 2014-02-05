@@ -20,7 +20,7 @@
        repository uses a cache that doesn't exist in this configuration).
      -->
     <clustering mode="distribution">
-      <sync/>
+      <sync replTimeout="600000"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
@@ -34,7 +34,7 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="replication">
-      <sync replTimeout="60000"/>
+      <sync replTimeout="6000000"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
