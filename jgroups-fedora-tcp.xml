@@ -32,12 +32,12 @@
          oob_thread_pool.queue_max_size="100"
          oob_thread_pool.rejection_policy="discard"/>
                          
-	<MPING timeout="10000"
+	<MPING timeout="1000"
             num_initial_members="1"/>
     <MERGE2 max_interval="30000"
             min_interval="10000"/>
     <FD_ALL timeout="150000"/>
-    <VERIFY_SUSPECT timeout="5000"  />
+    <VERIFY_SUSPECT timeout="150000"  />
     <BARRIER />
     <pbcast.NAKACK2 use_mcast_xmit="false"
                    discard_delivered_msgs="true"/>

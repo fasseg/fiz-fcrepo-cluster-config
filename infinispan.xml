@@ -34,7 +34,7 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="replication">
-      <sync/>
+      <sync replTimeout="60000"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
@@ -90,7 +90,7 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="distribution">
-      <sync/>
+      <sync replTimeout="600000"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
@@ -155,7 +155,7 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="distribution">
-      <sync />
+      <sync ireplTimeout="600000"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
