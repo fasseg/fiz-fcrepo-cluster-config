@@ -36,8 +36,7 @@
             num_initial_members="1"/>
     <MERGE2 max_interval="30000"
             min_interval="10000"/>
-    <FD_SOCK/>
-    <FD_ALL/>
+    <FD_ALL timeout="150000"/>
     <VERIFY_SUSPECT timeout="5000"  />
     <BARRIER />
     <pbcast.NAKACK2 use_mcast_xmit="false"
