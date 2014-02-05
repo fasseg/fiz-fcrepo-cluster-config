@@ -64,9 +64,8 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.repo.CacheDirPath:target/FedoraRepository/storage}"/>
 
-          <property name="fsyncMode" value="periodic"/>
+          <property name="fsyncMode" value="default"/>
 		
-	  <property name="fsyncInterval" value="2000" />
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
@@ -129,7 +128,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.CacheDirPath:target/FedoraRepositoryMetaData/storage}"/>
 
-          <property name="fsyncMode" value="periodic"/>
+          <property name="fsyncMode" value="default"/>
 	  
 	  <property name="fsyncInterval" value="2000" />
         </properties>
@@ -194,9 +193,8 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.binary.CacheDirPath:target/FedoraRepositoryBinaryData/storage}"/>
 
-          <property name="fsyncMode" value="periodic"/>
+          <property name="fsyncMode" value="default"/>
 	  
-	  <property name="fsyncInterval" value="2000" />
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
