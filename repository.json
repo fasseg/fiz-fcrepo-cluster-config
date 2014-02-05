@@ -11,11 +11,6 @@
     },
     "query" : {
         "enabled" : "false",
-        "rebuildUponStartup" : "if_missing",
-
-        "indexing" : {
-            "mode" : "${fcrepo.modeshape.query.mode:sync}"
-        }
     },
     "storage" : {
         "cacheName" : "FedoraRepository",

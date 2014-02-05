@@ -33,23 +33,15 @@
         use pessimistic locking, which is required whenever applications will be concurrently
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
-    <clustering mode="distribution">
+    <clustering mode="replication">
       <sync/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
-      <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
-      <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
+      <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
 
-    <locking concurrencyLevel="1000" lockAcquisitionTimeout="15000" useLockStriping="false" />
+    <locking isolationLevel="READ_COMMITTED" writeSkewCheck="false" lockAcquisitionTimeout="15000" />
 
-    <deadlockDetection enabled="true" spinDuration="1000"/>
-
-
-    <eviction maxEntries="500"  strategy="LIRS" threadPolicy="DEFAULT"/>
-
-    <transaction
-        transactionManagerLookupClass="org.infinispan.transaction.lookup.GenericTransactionManagerLookup"
-        transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
+    <transaction transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
         data to be persisted, not just what doesn't fit into memory. Shared is false because there
