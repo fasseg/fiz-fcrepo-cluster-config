@@ -1,19 +1,38 @@
 <config xmlns="urn:org:jgroups"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/JGroups-3.0.xsd">
-    <TCP loopback="true"
-	client_bind_addr="GLOBAL"
-	conn_expire_time="1048576"
-	linger="-1"
-	peer_addr_read_timeout="10000"
-	reaper_interval="120000"
-	recv_buf_size="26214400"
-	send_buf_size="5242880"
-	send_queue_size="64000"
-	sock_conn_timeout="10000"
-	tcp_nodelay="true"
-	use_send_queues="true" />
-    <MPING timeout="10000"
+       <TCP bind_port="7800"
+         loopback="false"
+         recv_buf_size="${tcp.recv_buf_size:5M}"
+         send_buf_size="${tcp.send_buf_size:640K}"
+         max_bundle_size="64K"
+         max_bundle_timeout="30"
+         use_send_queues="true"
+         sock_conn_timeout="300"
+
+         timer_type="new3"
+         timer.min_threads="4"
+         timer.max_threads="10"
+         timer.keep_alive_time="3000"
+         timer.queue_max_size="500"
+         
+         thread_pool.enabled="true"
+         thread_pool.min_threads="1"
+         thread_pool.max_threads="10"
+         thread_pool.keep_alive_time="5000"
+         thread_pool.queue_enabled="true"
+         thread_pool.queue_max_size="10000"
+         thread_pool.rejection_policy="discard"
+
+         oob_thread_pool.enabled="true"
+         oob_thread_pool.min_threads="1"
+         oob_thread_pool.max_threads="8"
+         oob_thread_pool.keep_alive_time="5000"
+         oob_thread_pool.queue_enabled="false"
+         oob_thread_pool.queue_max_size="100"
+         oob_thread_pool.rejection_policy="discard"/>
+                         
+	<MPING timeout="10000"
             num_initial_members="1"/>
     <MERGE2 max_interval="30000"
             min_interval="10000"/>
