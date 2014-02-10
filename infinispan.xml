@@ -34,7 +34,7 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="replication">
-      <sync replTimeout="6000000"/>
+      <async asyncMarshalling="true" useReplQueue="true"/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
