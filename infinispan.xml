@@ -129,7 +129,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.CacheDirPath:target/FedoraRepositoryMetaData/storage}"/>
 
-          <property name="/syncMode" value="default"/>
+          <property name="fsyncMode" value="default"/>
 	  
 	  <property name="fsyncInterval" value="2000" />
         </properties>
