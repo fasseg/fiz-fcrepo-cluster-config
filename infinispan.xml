@@ -20,7 +20,7 @@
        repository uses a cache that doesn't exist in this configuration).
      -->
     <clustering mode="distribution">
-      <sync replTimeout="600000"/>
+      <sync/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
@@ -34,15 +34,20 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="replication">
-      <async asyncMarshalling="false" useReplQueue="true"/>
-      <l1 enabled="false" lifespan="0" onRehash="false"/>
-      <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
+      <sync/>
+      <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
     </clustering>
 
-    <locking isolationLevel="READ_COMMITTED" writeSkewCheck="false" lockAcquisitionTimeout="150000" useLockStriping="true" />
+    <locking concurrencyLevel="1000" lockAcquisitionTimeout="15000" useLockStriping="false" />
 
-    <transaction transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
+    <deadlockDetection enabled="true" spinDuration="1000"/>
 
+
+    <eviction maxEntries="500"  strategy="LIRS" threadPolicy="DEFAULT"/>
+
+    <transaction
+        transactionManagerLookupClass="org.infinispan.transaction.lookup.GenericTransactionManagerLookup"
+        transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
         data to be persisted, not just what doesn't fit into memory. Shared is false because there
@@ -65,8 +70,7 @@
           <!-- We have to set the location where we want to store the data. -->
           <property name="location" value="${fcrepo.ispn.repo.CacheDirPath:target/FedoraRepository/storage}"/>
 
-          <property name="fsyncMode" value="default"/>
-		
+          <property name="fsyncMode" value="perWrite"/>
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
@@ -90,14 +94,12 @@
         use pessimistic locking, which is required whenever applications will be concurrently
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
-    <clustering mode="distribution">
-      <sync replTimeout="600000"/>
-      <l1 enabled="false" lifespan="0" onRehash="false"/>
-      <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
+    <clustering mode="replication">
+      <sync/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
     </clustering>
 
-    <locking concurrencyLevel="1000" lockAcquisitionTimeout="150000" useLockStriping="false" />
+    <locking concurrencyLevel="1000" lockAcquisitionTimeout="15000" useLockStriping="false" />
 
     <deadlockDetection enabled="true" spinDuration="1000"/>
 
@@ -130,8 +132,6 @@
           <property name="location" value="${fcrepo.ispn.CacheDirPath:target/FedoraRepositoryMetaData/storage}"/>
 
           <property name="fsyncMode" value="perWrite"/>
-	  
-	  <property name="fsyncInterval" value="2000" />
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
@@ -156,13 +156,13 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="distribution">
-      <sync replTimeout="600000"/>
+      <sync replTimeout="${fcrepo.ispn.replication.timeout:10000}" />
       <l1 enabled="false" lifespan="0" onRehash="false"/>
-      <hash numOwners="${fcrepo.ispn.numOwners:2}"/>
+      <hash numOwners="${fcrepo.ispn.numOwners:2}" numSegments="40"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true"/>
     </clustering>
 
-    <locking concurrencyLevel="1000" lockAcquisitionTimeout="150000" useLockStriping="false" />
+    <locking concurrencyLevel="1000" lockAcquisitionTimeout="15000" useLockStriping="false" />
 
     <deadlockDetection enabled="true" spinDuration="1000"/>
 
@@ -195,7 +195,6 @@
           <property name="location" value="${fcrepo.ispn.binary.CacheDirPath:target/FedoraRepositoryBinaryData/storage}"/>
 
           <property name="fsyncMode" value="perWrite"/>
-	  
         </properties>
         <!-- This repository isn't clustered, so we could set up the SingletonStore.
          singletonStore enabled="true" pushStateWhenCoordinator="true" pushStateTimeout="20000"/>
