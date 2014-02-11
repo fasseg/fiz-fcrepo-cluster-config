@@ -34,14 +34,14 @@
         updating nodes within the same process. If you're not sure, use pessimistic locking.
      -->
     <clustering mode="replication">
-      <async asyncMarshalling="false" useReplQueue="true"/>
+      <sync/>
       <l1 enabled="false" lifespan="0" onRehash="false"/>
       <stateTransfer chunkSize="100" fetchInMemoryState="true" timeout="120000"/>
     </clustering>
 
     <locking isolationLevel="READ_COMMITTED" writeSkewCheck="false" lockAcquisitionTimeout="150000" useLockStriping="true" />
 
-    <transaction transactionMode="TRANSACTIONAL" lockingMode="OPTIMISTIC"/>
+    <transaction transactionMode="TRANSACTIONAL" lockingMode="PESSIMISTIC"/>
 
     <!--
         Define the cache loaders (i.e., cache stores). Passivation is false because we want *all*
